@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo 开启bbr
 sleep 2
 
