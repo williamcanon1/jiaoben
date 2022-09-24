@@ -1,4 +1,4 @@
-#仅适用于ubuntu
+# 仅适用于ubuntu
 
 ```
 bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/wireguard_and_trojan.sh')
