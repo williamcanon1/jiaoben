@@ -71,6 +71,8 @@ acme.sh --installcert -d $website --ecc  --key-file   /root/trojan/server.key   
 echo 部署json
 
 read -p "输入转发地址" zhuanfa
+read -p "输入密码" mima
+read -p "输入path" Path
 cat > server.json << EOF
 {
     "run_type": "server",
@@ -79,7 +81,7 @@ cat > server.json << EOF
     "remote_addr": "$zhuanfa",
     "remote_port": 80,
     "password": [
-        "william202016"
+        "$mima"
     ],
     "log_level": 1,
     "log_file": "/root/trojan-go-access.log",
@@ -95,7 +97,7 @@ cat > server.json << EOF
     },
     "websocket": {
         "enabled": true,
-        "path": "/a777d82d",
+        "path": "/$Path",
         "host": "$website"
     }
 }
