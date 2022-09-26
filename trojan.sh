@@ -123,8 +123,8 @@ systemctl restart nginx
 
 systemctl enable trojan && systemctl start trojan
 
-read -p "输入自建前辍" qianzhui
-echo url:trojan://$mima@$website:443?peer=$website&sni=$website\#$qianzhui_自建
+#read -p "输入自建前辍" qianzhui
+echo url:trojan://$mima@$website:443?peer=$website&sni=$website\#$website_自建
 
 
 ufw allow 443/tcp 
