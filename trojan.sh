@@ -6,6 +6,8 @@ echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
 
+apt update && apt upgrade -y
+
 echo 部署开机配置
 
 sleep 1
@@ -51,7 +53,7 @@ unzip trojan-go-linux-amd64.zip
 ###########################################################
 echo 申请证书
 
-apt update && apt upgrade -y
+
 
 curl https://get.acme.sh | sh #安装acme
 apt install socat  #安装socat
