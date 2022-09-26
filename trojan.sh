@@ -132,4 +132,4 @@ ufw allow 1997/tcp
 ufw allow 22/tcp
 echo y | ufw enable > /dev/null
 
-echo "url:trojan://$mima@$website:443?peer=$website&sni=$website#$website_自建"
+echo "url链接为：trojan://$mima@$website:443?peer=$website&sni=$website#$website_自建"
