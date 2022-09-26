@@ -1,12 +1,12 @@
 #!/bin/bash
+apt update && apt upgrade -y
+
 echo 开启bbr
 sleep 2
 
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
-
-apt update && apt upgrade -y
 
 echo 部署开机配置
 
@@ -52,7 +52,6 @@ rm -rf $banben
 unzip trojan-go-linux-amd64.zip
 ###########################################################
 echo 申请证书
-
 
 
 curl https://get.acme.sh | sh #安装acme
