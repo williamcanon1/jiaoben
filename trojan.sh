@@ -131,5 +131,5 @@ ufw allow 80/tcp
 ufw allow 1997/tcp
 ufw allow 22/tcp
 echo y | ufw enable > /dev/null
-
-echo "url链接为：trojan://$mima@$website:443?peer=$website&sni=$website#$website_自建"
+read -p "输入节点名称" mingcheng
+echo "url链接为：trojan://$mima@$website:443?peer=$website&sni=$website#${mingcheng}"
