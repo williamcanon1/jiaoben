@@ -131,3 +131,4 @@ ufw allow 443/tcp
 ufw allow 80/tcp
 ufw allow 1997/tcp
 ufw allow 22/tcp
+echo y | ufw enable
