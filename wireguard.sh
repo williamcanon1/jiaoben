@@ -16,15 +16,15 @@ do
         wg genkey | tee $a-privatekey | wg pubkey > $a-publickey
 done
 
-
+ovrn=`ifconfig | grep flags| head -n 1 | awk -F ":" '{print $1}'`
 cat > wg0.conf <<EOF
 [Interface]
 ListenPort = 6666# 客户端连过来填写的端口，安全组的tcp和udp都要放行
 Address = 172.19.0.1/24  #wg之前通信组网的内网ip和段
 PrivateKey = $(cat gw-privatekey)   # 使用 shell 读取gateway的私钥到这里
 # 下面两条是放行的iptables和MASQUERADE
-PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o ens4 -j MASQUERADE; iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
-PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o ens4 -j MASQUERADE; iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $ovrn -j MASQUERADE; iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o $ovrn -j MASQUERADE; iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
 
 EOF
 for c in 1 2 3 4 5 6 7
