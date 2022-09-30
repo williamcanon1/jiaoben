@@ -15,9 +15,10 @@ bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/
 bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/trojan.sh')
 
 ```
+------------------------------------------------------------------------------------------------------------
 
 ```
-wget https://raw.githubusercontent.com/williamcanon1/jiaoben/main/cloudflare-ddns.sh && chmod u+x cloudflare*
+wget  -t1 -T2 https://raw.githubusercontent.com/williamcanon1/jiaoben/main/cloudflare-ddns.sh
 
 ```
 -------------------------------------------------------------------------------------------------------------
