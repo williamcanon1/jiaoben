@@ -16,4 +16,8 @@ bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/
 
 ```
 
+```
+wget https://raw.githubusercontent.com/williamcanon1/jiaoben/main/cloudflare-ddns.sh && chmod u+x cloudflare*
+
+```
 -------------------------------------------------------------------------------------------------------------
