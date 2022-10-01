@@ -55,7 +55,7 @@ Endpoint = $(curl -s ip.sb):6666 #gateway 公网ip和端口
 PersistentKeepalive = 5 # 心跳时间
 EOF
 done
-
+ufw allow 6666
 systemctl enable wg-quick@wg0
 
 wg-quick up wg0
