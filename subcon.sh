@@ -1,10 +1,4 @@
 #!/bin/bash
-function isRoot() {
-	if [ "${EUID}" -ne 0 ]; then
-		echo "需要root用户运行"
-		exit 1
-	fi
-}
 
 banben=./banben
 
