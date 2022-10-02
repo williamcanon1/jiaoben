@@ -19,10 +19,10 @@ Wants=network.target
 [Service]
 Type=simple
 ExecStart=/root/subconverter/subconverter &
-
 [Install]
 WantedBy=multi-user.target
 EOF
+
 systemctl start sub
 systemctl enable sub
 ufw allow 25500/tcp
