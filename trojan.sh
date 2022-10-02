@@ -114,7 +114,7 @@ server{
    server_name   $website;
    #把http的域名请求转成https
 #   rewrite ^(.*)$ https://$host$1; #将所有HTTP请求通过rewrite指令重定向到HTTPS。
-   if ($host ~* "wica.top$") {
+   if ($host ~* "$website$") {
    rewrite ^/(.*)$ https://$website/ permanent;
 }
 }
@@ -125,6 +125,7 @@ systemctl restart nginx
 systemctl enable trojan && systemctl start trojan
 
 #read -p "输入自建前辍" qianzhui
+apt install ufw -y
 
 ufw allow 443/tcp 
 ufw allow 80/tcp
