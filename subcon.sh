@@ -27,3 +27,4 @@ WantedBy=multi-user.target
 
 systemctl start sub
 systemctl enable sub
+ufw allow 25500/tcp
