@@ -24,8 +24,6 @@ fi
 
 useradd -m -g root $User
 
-mkdir -p /home/$User
-
 #echo -e "$PAsss\n$PAsss" | passwd &User
 
 echo "$User:$PAsss" | chpasswd
