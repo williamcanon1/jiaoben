@@ -22,7 +22,7 @@ duank=22
 fi
 
 
-useradd -d /home/$User -g root $User
+useradd -m -g root $User
 
 mkdir -p /home/$User
 
