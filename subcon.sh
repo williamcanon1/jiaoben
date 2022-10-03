@@ -8,7 +8,7 @@ wget "https://github.com/tindy2013/subconverter/releases/download/$(cat $banben)
 
 rm -rf $banben
 
-tar zxvf subconverter*
+tar zxvf subconverter_linux64.tar.gz
 rm subconverter_linux64.tar.gz
 
 cat > /lib/systemd/system/sub.service << EOF
