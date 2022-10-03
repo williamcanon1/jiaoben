@@ -13,7 +13,7 @@ echo 两个密码不一致请重新输入
 exit
 fi
 echo -e \ 
-read -p "是否更改登录端口号 \n是请输入1，直接回车不更改" numb
+read -p "是否更改登录端口号--是请输入1，直接回车不更改" numb
 
 if [ $numb -eq 1 ];then
 read -p "输入ssh端口号" duank
