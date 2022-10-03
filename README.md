@@ -25,5 +25,5 @@ wget  -t1 -T2 https://raw.githubusercontent.com/williamcanon1/jiaoben/main/cloud
 bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/ubuntu_docker.sh')
 
 ```
-##Tab 无法补全安装 bash-completion
+## Tab 无法补全安装 bash-completion
 -------------------------------------------------------------------------------------------------------------
