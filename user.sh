@@ -3,7 +3,7 @@
 read -p "新建用户名" User
 
 read -s -p "用户密码" PAss1
-echo \
+echo \n
 read -s -p "再次输入" PAss2
 
 if [ $PAss1 == $PAss2 ];then
@@ -13,7 +13,7 @@ echo 两个密码不一致请重新输入
 exit
 fi
 
-read -p "是否更改登录端口号 \是请输入1，直接回车不更改" numb
+read -p "是否更改登录端口号 \n是请输入1，直接回车不更改" numb
 
 if [ $numb -eq 1 ];then
 read -p "输入ssh端口号" duank
