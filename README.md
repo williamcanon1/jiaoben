@@ -24,5 +24,5 @@ wget  -t1 -T2 https://raw.githubusercontent.com/williamcanon1/jiaoben/main/cloud
 ```
 bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/ubuntu_docker.sh')
 
-···
+```
 -------------------------------------------------------------------------------------------------------------
