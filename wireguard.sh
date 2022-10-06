@@ -2,7 +2,7 @@
 
 apt update && apt upgrade -y
 
-apt install wireguard -y
+apt install wireguard net-tools  -y
 
 cd /etc/wireguard
 
