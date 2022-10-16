@@ -27,3 +27,6 @@ bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/
 ```
 ## Tab 无法补全安装 bash-completion
 -------------------------------------------------------------------------------------------------------------
+更改语言
+sudo apt install locales
+sudo dpkg-reconfigure locales
