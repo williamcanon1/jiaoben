@@ -30,3 +30,4 @@ bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/
 更改语言
 sudo apt install locales
 sudo dpkg-reconfigure locales
+sudo apt install ttf-wqy-microhei ttf-wqy-zenhei xfonts-intl-chinese
