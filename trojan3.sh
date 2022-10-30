@@ -91,7 +91,7 @@ cat > server.json << EOF
 EOF
 
 apt install nginx -y
-
+read -p "输入域名" website
 host='$host'
 cat > /etc/nginx/conf.d/default.conf << EOF
 server{
