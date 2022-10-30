@@ -58,6 +58,7 @@ echo 部署json
 read -p "输入转发地址" zhuanfa
 read -p "输入密码" mima
 read -p "输入path" Path
+read -p "输入用户名" users
 cat > server.json << EOF
 {
     "run_type": "server",
@@ -73,8 +74,8 @@ cat > server.json << EOF
     "ssl": {
         "verify": true,
         "verify_hostname": true,
-        "cert": "/home/william/.ssl/server.crt",
-        "key": "/home/william/.ssl/server.key",
+        "cert": "/home/$users/.ssl/server.crt",
+        "key": "/home/$users/.ssl/server.key",
         "sni": "$website",
         "fallback_addr": "$zhuanfa",
         "fallback_port": 80,
