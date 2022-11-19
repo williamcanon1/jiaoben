@@ -46,3 +46,6 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
+else
+echo 请输入1 或 2 你输 的什么几把玩意。
+fi
