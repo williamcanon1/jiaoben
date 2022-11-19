@@ -29,3 +29,20 @@ acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullc
 
 elif [ $Fangshi -eq 2 ];then
 echo 开始已dns方式获取证书
+read -p "输入key   " Key
+read -p "输入邮箱   " Mail
+export CF_Key="$Key"
+export CF_Email=$Mail
+read -p "输入域名" website
+
+echo 开始申请 证书|
+acme.sh --issue --dns dns_cf -d $website -d *.$website -k ec-256
+
+echo 安装证书 
+read  -e -p "输入安装路径" Luji
+if [ -e $Luji ];then
+        echo 文件存在
+else
+        mkdir -p $Luji
+fi
+acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
