@@ -51,7 +51,7 @@ DNS = 8.8.8.8
 PublicKey = $(cat gw-publickey)   # gateway的公钥
 # pc 上访问下面的这些段都会发往 ecs 上的 wg
 AllowedIPs = 0.0.0.0/0
-Endpoint = $(curl -s ip.sb):6666 #gateway 公网ip和端口
+Endpoint = $(curl -s4 ip.sb):6666 #gateway 公网ip和端口
 PersistentKeepalive = 5 # 心跳时间
 EOF
 done
