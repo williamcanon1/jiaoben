@@ -1,13 +1,6 @@
 #!/bin/bash
 apt update && apt upgrade -y
 
-echo 开启bbr
-sleep 2
-
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-sysctl -p
-
 echo 部署开机配置
 
 sleep 1
