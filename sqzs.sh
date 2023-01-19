@@ -49,7 +49,7 @@ apt install socat  #安装socat
 echo 创建软链
 ln -s  /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
 echo 注册
-acme.sh --register-account -m my@example.com
+acme.sh --register-account -m dahe@mama.com
 echo 开放 防火墙
 ufw allow 80
 acme.sh --set-default-ca --server letsencrypt
