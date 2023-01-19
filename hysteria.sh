@@ -261,9 +261,7 @@ Documentation=https://hysteria.network/
 After=network.target
 
 [Service]
-User=hysteria
-CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_NET_RAW
-AmbientCapabilities=CAP_NET_BIND_SERVICE CAP_NET_RAW
+Type=simple
 NoNewPrivileges=true
 WorkingDirectory=/etc/hysteria
 Environment=HYSTERIA_LOG_LEVEL=info
