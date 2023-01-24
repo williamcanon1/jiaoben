@@ -6,8 +6,7 @@ apt install wireguard net-tools  -y
 
 cd /etc/wireguard
 
-sysctl -w net.ipv4.ip_forward=1
-
+bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/bbr.sh')
 
 wg genkey | tee gw-privatekey | wg pubkey > gw-publickey
 
@@ -17,9 +16,10 @@ do
 done
 
 ovrn=`ifconfig | grep flags| head -n 1 | awk -F ":" '{print $1}'`
+read -p "输入端口" duankou
 cat > wg0.conf <<EOF
 [Interface]
-ListenPort = 6666# 客户端连过来填写的端口，安全组的tcp和udp都要放行
+ListenPort = $duankou# 客户端连过来填写的端口，安全组的tcp和udp都要放行
 Address = 172.19.0.1/24  #wg之前通信组网的内网ip和段
 PrivateKey = $(cat gw-privatekey)   # 使用 shell 读取gateway的私钥到这里
 # 下面两条是放行的iptables和MASQUERADE
@@ -51,11 +51,11 @@ DNS = 8.8.8.8
 PublicKey = $(cat gw-publickey)   # gateway的公钥
 # pc 上访问下面的这些段都会发往 ecs 上的 wg
 AllowedIPs = 0.0.0.0/0
-Endpoint = $(curl -s4 ip.sb):6666 #gateway 公网ip和端口
+Endpoint = $(curl -s4 ip.sb):$duankou #gateway 公网ip和端口
 PersistentKeepalive = 5 # 心跳时间
 EOF
 done
-ufw allow 6666
+ufw allow $duankou/udp
 systemctl enable wg-quick@wg0
 
 wg-quick up wg0
