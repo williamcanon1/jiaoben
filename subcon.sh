@@ -25,4 +25,4 @@ EOF
 
 systemctl start sub
 systemctl enable sub
-ufw allow 25500/tcp
+;ufw allow 25500/tcp
