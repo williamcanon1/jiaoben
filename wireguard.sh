@@ -55,6 +55,7 @@ Endpoint = $(curl -s4 ip.sb):$duankou #gateway 公网ip和端口
 PersistentKeepalive = 5 # 心跳时间
 EOF
 done
+chmod 600 /etc/wireguard/*
 ufw allow $duankou/udp
 systemctl enable wg-quick@wg0
 
