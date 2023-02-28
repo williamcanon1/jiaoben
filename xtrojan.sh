@@ -139,6 +139,6 @@ server {
       proxy_pass $zhuanfa;
 }
 }
-
+EOF
 nginx -s reload
 
