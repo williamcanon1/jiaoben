@@ -7,7 +7,7 @@ sleep 1
 
 mkdir /root/xray
 cd /root/xray
-
+#################################################
 cat > /lib/systemd/system/xtrojan.service << EOF 
 [Unit]
 Description=xTrojan
@@ -45,7 +45,10 @@ read -p "输入端口 可随机"  Duankou
 read -p "输入路径"  Lujing
 read -p "输入密码"  Mimaa
 read -p "输入域名"  Yuming
+read  -e -p "输入证书路径" Zhengshu
+if [ -e $Luji ];then
 
+###################################################
 cat > /root/xray/config.json << EOF
 {
   "log": {
@@ -98,9 +101,9 @@ cat > /root/xray/config.json << EOF
 }
 EOF
 systemctl start xtrojan.service && systemctl enable xtrojan.service
-##########
+#############################
 apt install nginx -y
-###############
+#############################
 echo 'server{
    listen 80;
    server_name   '$Yuming' ;
@@ -112,8 +115,8 @@ server {
     listen 443 ssl http2;
     server_name   '$Yuming';
 
-    ssl_certificate /home/william/.ssl/server.crt;
-    ssl_certificate_key /home/william/.ssl/server.key;
+    ssl_certificate '$Zhengshu'/server.crt;
+    ssl_certificate_key '$Zhengshu'/server.key;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers TLS13_AES_128_GCM_SHA256:TLS13_AES_256_GCM_SHA384:TLS13_CHACHA20_POLY1305_SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305;
 
@@ -143,4 +146,7 @@ server {
 ufw allow 80/tcp
 ufw allow 443/tcp
 nginx -s reload
+else
+        证书文件不存在 请重新检查 
+fi
 
