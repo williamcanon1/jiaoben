@@ -142,6 +142,7 @@ server {
       proxy_pass '$zhuanfa';
 }
 }' > /etc/nginx/conf.d/default.conf
+sed -i 's/\/\/server./\/server./g' /etc/nginx/conf.d/default.conf
 ##
 ufw allow 80/tcp
 ufw allow 443/tcp
