@@ -8,7 +8,7 @@ sleep 1
 mkdir /root/xray
 cd /root/xray
 
-cat /lib/systemd/system/xtrojan.service << EOF 
+cat > /lib/systemd/system/xtrojan.service << EOF 
 [Unit]
 Description=xTrojan
 After=network.target nss-lookup.target
