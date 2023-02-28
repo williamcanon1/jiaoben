@@ -101,16 +101,16 @@ systemctl start xtrojan.service && systemctl enable xtrojan.service
 apt install nginx -y
 cat > /etc/nginx/conf.d/default.conf << EOF
 
-server{
+'server{
    listen 80;
-   server_name   $Yuming ;
-   if ($host ~* "$Yuming$") {
-   rewrite ^/(.*)$ https://$Yuming/ permanent;
+   server_name   '$Yuming' ;
+   if ($host ~* '"$Yuming$"') {
+   rewrite ^/(.*)$ https://'$Yuming'/ permanent;
 }
 }
 server {
     listen 443 ssl http2;
-    server_name   $Yuming;
+    server_name   '$Yuming';
 
     ssl_certificate /home/william/.ssl/server.crt;
     ssl_certificate_key /home/william/.ssl/server.key;
@@ -121,7 +121,7 @@ server {
         if ($http_upgrade != "websocket") {
                 return 404;
         }
-        proxy_pass http://127.0.0.1:$Duankou;
+        proxy_pass http://127.0.0.1:'$Duankou';
         proxy_redirect off;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -136,7 +136,7 @@ server {
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-Proto $scheme;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_pass $zhuanfa;
+      proxy_pass '$zhuanfa';
 }
 }
 EOF
