@@ -98,10 +98,10 @@ cat > /root/xray/config.json << EOF
 }
 EOF
 systemctl start xtrojan.service && systemctl enable xtrojan.service
+##########
 apt install nginx -y
-cat > /etc/nginx/conf.d/default.conf << EOF
-
-'server{
+###############
+echo 'server{
    listen 80;
    server_name   '$Yuming' ;
    if ($host ~* '"$Yuming$"') {
@@ -138,8 +138,7 @@ server {
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_pass '$zhuanfa';
 }
-}
-EOF
+}' > /etc/nginx/conf.d/default.conf
 ##
 ufw allow 80/tcp
 ufw allow 443/tcp
