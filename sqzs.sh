@@ -15,7 +15,7 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
-sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+sed -i '/acme.sh/d' /var/spool/cron/crontabs/root
 echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
 
 
@@ -41,7 +41,7 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
-sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+sed -i '/acme.sh/d' /var/spool/cron/crontabs/root
 echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
 
 
@@ -78,7 +78,7 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
-sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+sed -i '/acme.sh/d' /var/spool/cron/crontabs/root
 echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
 
 
@@ -104,7 +104,7 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
-sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+sed -i '/acme.sh/d' /var/spool/cron/crontabs/root
 echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
 
 
