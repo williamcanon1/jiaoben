@@ -15,13 +15,19 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
+sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
+
 
 elif [ $Fangshi -eq 2 ];then
 echo 开始已dns方式获取证书
 read -p "输入key   " Key
 read -p "输入邮箱   " Mail
 export CF_Key="$Key"
-export CF_Email=$Mail
+export CF_Email="$Mail"
+echo 'export CF_Key='"$Key"'' >> /etc/profile
+echo 'export CF_Email='"$Mail"'' >> /etc/profile
+source /etc/profile
 read -p "输入域名" website
 
 echo 开始申请 证书|
@@ -35,6 +41,10 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
+sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
+
+
 else
 
 echo 请输入1 或 2 你输 的什么几把玩意。
@@ -68,13 +78,19 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
+sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
+
 
 elif [ $Fangshi -eq 2 ];then
 echo 开始已dns方式获取证书
 read -p "输入key   " Key
 read -p "输入邮箱   " Mail
 export CF_Key="$Key"
-export CF_Email=$Mail
+export CF_Email="$Mail"
+echo 'export CF_Key='"$Key"'' >> /etc/profile
+echo 'export CF_Email='"$Mail"'' >> /etc/profile
+source /etc/profile
 read -p "输入域名" website
 
 echo 开始申请 证书|
@@ -88,6 +104,10 @@ else
         mkdir -p $Luji
 fi
 acme.sh --installcert -d $website --ecc  --key-file   $Luji/server.key   --fullchain-file  $Luji/server.crt 
+sed -e '/acme.sh/d' /var/spool/cron/crontabs/root
+echo '15 3 * * 1 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null && nginx -s reload' >> /var/spool/cron/crontabs/root
+
+
 else
 
 echo 请输入1 或 2 你输 的什么几把玩意。
