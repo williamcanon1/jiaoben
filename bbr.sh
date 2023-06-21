@@ -80,8 +80,8 @@ net.ipv4.conf.all.route_localnet = 1
 net.ipv4.ip_forward = 1
 net.ipv4.conf.all.forwarding = 1
 net.ipv4.conf.default.forwarding = 1
-net.core.default_qdisc=fq >> /etc/sysctl.conf
-net.ipv4.tcp_congestion_control=bbr >> /etc/sysctl.conf
+net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr
 EOF
 sleep 2
 sysctl -p
