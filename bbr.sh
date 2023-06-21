@@ -1,9 +1,4 @@
 echo 开启bbr
-sleep 2
-
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-sysctl -p
 
 sed -i '/fs.file-max/d' /etc/sysctl.conf
 sed -i '/fs.inotify.max_user_instances/d' /etc/sysctl.conf
@@ -85,4 +80,8 @@ net.ipv4.conf.all.route_localnet = 1
 net.ipv4.ip_forward = 1
 net.ipv4.conf.all.forwarding = 1
 net.ipv4.conf.default.forwarding = 1
+net.core.default_qdisc=fq >> /etc/sysctl.conf
+net.ipv4.tcp_congestion_control=bbr >> /etc/sysctl.conf
 EOF
+sleep 2
+sysctl -p
