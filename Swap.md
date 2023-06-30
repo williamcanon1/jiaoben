@@ -11,6 +11,9 @@
 ```
 sudo dd if=/dev/zero of=/swapfile bs=1G count=4
 ```
+```
+sudo fallocate -l 4G /swapfile
+```
 
 3. 设置访问权限
 
