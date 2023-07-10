@@ -43,10 +43,7 @@ bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/
    fi
 
    重新登录Shell即可。
------------------------------------
-©著作权归作者所有：来自51CTO博客作者tangduanping的原创作品，请联系作者获取转载授权，否则将追究法律责任
-Linux Shell 按Tab键不能补全
-https://blog.51cto.com/tdppro/1248285
+----------------------
 -------------------------------------------------------------------------------------------------------------
 更改语言
 sudo apt install locales
