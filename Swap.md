@@ -45,7 +45,7 @@ sudo swapon /swapfile
 修改 /etc/fstab 文件，将以下内容添加到文件末尾，实现启动时自动挂载swap分区文件。
 
 ```
-cat /swapfile none swap sw 0 0 >> /etc/fstab
+echo "/swapfile none swap sw 0 0" >> /etc/fstab
 ```
 
 7. 禁用swap分区
