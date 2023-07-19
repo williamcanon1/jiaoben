@@ -49,3 +49,7 @@ bash <(curl -s -L 'https://raw.githubusercontent.com/williamcanon1/jiaoben/main/
 sudo apt install locales
 sudo dpkg-reconfigure locales
 sudo apt install ttf-wqy-microhei ttf-wqy-zenhei xfonts-intl-chinese
+
+
+
+DDoS deflate    fail2ban
