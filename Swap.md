@@ -11,6 +11,7 @@
 ```
 sudo dd if=/dev/zero of=/swapfile bs=1G count=4
 ```
+或
 ```
 sudo fallocate -l 4G /swapfile
 ```
