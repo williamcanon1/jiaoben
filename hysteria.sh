@@ -453,8 +453,10 @@ main() {
 }
 
 main "$@"
+ufw allow 10010/udp && ufw allow 25000:30000/udp
+echo "iptables -t nat -A PREROUTING -i eth0 -p udp --dport 25000:30000 -j DNAT --to-destination :10010"
 
-#iptables -t nat -A PREROUTING -i eth0 -p udp --dport 25000:30000 -j DNAT --to-destination :10010
+
 
 
 
