@@ -1,5 +1,6 @@
 #!/bin/bash
-
+apt update
+apt install curl wget vim sudo bash-completion tmux fail2ban ufw -y
 read -p "新建用户名" User
 
 read -s -p "用户密码" PAss1
