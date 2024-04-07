@@ -15,7 +15,7 @@ do
         wg genkey | tee $a-privatekey | wg pubkey > $a-publickey
 done
 
-ovrn=`ifconfig | grep -v docker | grep flags| head -n 1 | awk -F ":" '{print $1}'`
+ovrn=`ifconfig | grep -v docker | grep -v br | grep -v lo | grep flags| head -n 1 | awk -F ":" '{print $1}'`
 read -p "输入端口" duankou
 read -p "输入wg名称" ipduan
 cat > $ipduan.conf <<EOF
