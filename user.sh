@@ -47,4 +47,29 @@ sed -i '62a\PasswordAuthentication yes' /etc/ssh/sshd_config
 
 systemctl restart sshd
 
+cat > /etc/fail2ban/jail.local  << EOF
+#DEFAULT-START
+[DEFAULT]
+bantime = 600
+findtime = 300
+maxretry = 5
+banaction = ufw
+action = %(action_mwl)s
+#DEFAULT-END
+
+[sshd]
+ignoreip = 127.0.0.1/8
+enabled = true
+filter = sshd
+port = $duank
+maxretry = 5
+findtime = 300
+bantime = 600
+banaction = ufw
+action = %(action_mwl)s
+logpath = /var/log/auth.log
+EOF
+
+systemctl restart fail2ban.service 
+
 echo “您的新用户名为 $User 登录端口为 $duank
