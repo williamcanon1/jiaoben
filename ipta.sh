@@ -19,7 +19,7 @@ iptables -t nat -A PREROUTING -p udp -m udp --dport $DuanKou -j DNAT --to-destin
 iptables -t nat -A POSTROUTING -d $MuBiaoIP -p tcp -m tcp --dport $BenDiIPDuanKou -j SNAT --to-source $BenDiIP
 iptables -t nat -A POSTROUTING -d $MuBiaoIP -p udp -m udp --dport $BenDiIPDuanKou -j SNAT --to-source $BenDiIP
 
-
+iptables -A FORWARD -p tcp --dport 65535 -j ACCEPT 
 
 
 多口
