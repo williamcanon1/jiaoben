@@ -50,6 +50,9 @@ sudo apt install locales
 sudo dpkg-reconfigure locales
 sudo apt install ttf-wqy-microhei ttf-wqy-zenhei xfonts-intl-chinese
 
+export LANG=zh_CN.UTF-8
+
 
 
 DDoS deflate    fail2ban
+
