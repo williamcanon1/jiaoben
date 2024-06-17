@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 read  -e -p "输入安装路径" LuJing
 read  -e -p "输入证书天数" TianShu
 if [ -e "$LuJing" ];then
