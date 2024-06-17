@@ -1,15 +1,16 @@
 #!/bin/bash
+set -x
 read  -e -p "输入安装路径" LuJing
 read  -e -p "输入证书天数" TianShu
-if [ -e $LuJing ];then
+if [ -e "$LuJing" ];then
         echo 文件存在
 else
-        mkdir -p $LuJing
+        mkdir -p "$LuJing"
 fi
 
-openssl genpkey -algorithm RSA -out $LuJing/server.key
+openssl genpkey -algorithm RSA -out "$LuJing"/server.key
 
-openssl req -new -key $LuJing/server.key -out $LuJing/server.csr
+openssl req -new -key "$LuJing"/server.key -out "$LuJing"/server.csr
 
-openssl x509 -req -days $TianShu -in $LuJing/server.csr -signkey $LuJing/server.key -out $LuJing/server.crt
+openssl x509 -req -days "$TianShu" -in "$LuJing"/server.csr -signkey "$LuJing"/server.key -out "$LuJing"/server.crt
 
