@@ -53,9 +53,9 @@ fi
 
 else
 echo acme未安装--开始安装acme
-curl https://get.acme.sh | sh #安装acme
 echo 安装socat
 apt install socat cron -y  #安装socat
+curl https://get.acme.sh | sh #安装acme
 echo 创建软链
 ln -s  /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
 echo 注册
