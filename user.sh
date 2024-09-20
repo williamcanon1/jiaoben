@@ -39,6 +39,8 @@ sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
 
 sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config
 
+sed -i '/KbdInteractiveAuthentication/d' /etc/ssh/sshd_config
+
 sed -i '14a\Port '$duank'' /etc/ssh/sshd_config
 
 sed -i '33a\PermitRootLogin no' /etc/ssh/sshd_config
