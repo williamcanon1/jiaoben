@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "请输入分区大小GB" FenQu
+read -p "请输入分区大小GB     " FenQu
 
 sudo fallocate -l $FenQu /swapfile
 
