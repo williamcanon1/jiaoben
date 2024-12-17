@@ -3,7 +3,7 @@ mkdir tanzhen && cd tanzhen
 
 read -p "输入key" Kkkey 
 
-cat > docker-compose.yaml < EOF
+cat > docker-compose.yaml << EOF
 services:
   beszel-agent:
     image: "henrygd/beszel-agent"
