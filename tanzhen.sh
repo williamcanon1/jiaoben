@@ -1,5 +1,5 @@
 #!/bin/sh
-mkdir tanzhen
+mkdir tanzhen && cd tanzhen
 
 read -p "输入key" Kkkey 
 
