@@ -1,5 +1,5 @@
-curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64 > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-x86_64 > /usr/bin/docker-compose
+chmod +x /usr/bin/docker-compose
 cat > /etc/docker/daemon.json << EOF
 {
     "log-driver": "json-file",
