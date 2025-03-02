@@ -23,15 +23,17 @@ duank=22
 fi
 
 
-useradd -m -g root $User
+useradd -m $User
 
+usermod -aG sudo $User
 #echo -e "$PAsss\n$PAsss" | passwd &User
 
 echo "$User:$PAsss" | chpasswd
 
 sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
 
-sed -i '20a\'$User'    ALL=(ALL:ALL) NOPASSWD:  ALL' /etc/sudoers
+#sed -i '20a\'$User'    ALL=(ALL:ALL) NOPASSWD:  ALL' /etc/sudoers
+sed -i 's/^%sudo[ \t]*ALL=(ALL:ALL) ALL$/sudo\tALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 
 sed -i '/Port/d' /etc/ssh/sshd_config
 
