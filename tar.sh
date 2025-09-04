@@ -39,7 +39,7 @@ while true; do
 done
 
 echo "正在打包、压缩、加密并分卷..."
-tar -czf - "$SRC" | \
+tar -cvzf - "$SRC" | \
 openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | \
 split -b "$SPLIT_SIZE" - "${OUTFILE}.part"
 
