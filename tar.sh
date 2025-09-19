@@ -51,11 +51,11 @@ if [ "$mode" = "-c" ]; then
     if command -v pv >/dev/null 2>&1; then
         tar -czf - "$SRC" | pv -s "$TOTAL_SIZE" | \
         openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | \
-        split -b "$SPLIT_SIZE" - "${OUTFILE}.part"
+        split -b "$SPLIT_SIZE" -d - "${OUTFILE}.part"
     else
         tar -czf - "$SRC" | \
         openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | \
-        split -b "$SPLIT_SIZE" - "${OUTFILE}.part"
+        split -b "$SPLIT_SIZE" -d - "${OUTFILE}.part"
     fi
 
     echo "完成！文件保存在: ${DEST}"
