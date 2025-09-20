@@ -48,15 +48,9 @@ if [ "$mode" = "-c" ]; then
     echo "源路径大小: $TOTAL_SIZE 字节"
     echo "正在打包、压缩、加密并分卷..."
 
-    if command -v pv >/dev/null 2>&1; then
-        tar -czf - "$SRC" | pv -s "$TOTAL_SIZE" | \
+        tar -czvf - "$SRC" | \
         openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | \
         split -b "$SPLIT_SIZE" -d - "${OUTFILE}.part"
-    else
-        tar -czf - "$SRC" | \
-        openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | \
-        split -b "$SPLIT_SIZE" -d - "${OUTFILE}.part"
-    fi
 
     echo "完成！文件保存在: ${DEST}"
     ls -lh "${OUTFILE}.part"*
@@ -97,7 +91,6 @@ elif [ "$mode" = "-x" ]; then
     fi
 
     echo "正在合并分卷并解密..."
-    if command -v pv >/dev/null 2>&1; then
         if [ "$OVERWRITE" = true ]; then
             cat "${PREFIX}"* | pv -s "$TOTAL_SIZE" | \
             openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$PASSWORD" | \
@@ -112,20 +105,6 @@ elif [ "$mode" = "-x" ]; then
             cp -rn "$TMPDIR/"* "$DEST/"
             rm -rf "$TMPDIR"
         fi
-    else
-        if [ "$OVERWRITE" = true ]; then
-            cat "${PREFIX}"* | \
-            openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$PASSWORD" | \
-            tar -xzf - -C "$DEST"
-        else
-            TMPDIR=$(mktemp -d)
-            cat "${PREFIX}"* | \
-            openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$PASSWORD" | \
-            tar -xzf - -C "$TMPDIR"
-            cp -rn "$TMPDIR/"* "$DEST/"
-            rm -rf "$TMPDIR"
-        fi
-    fi
 
     if [ $? -eq 0 ]; then
         echo "解密完成！文件已解压到: ${DEST}"
