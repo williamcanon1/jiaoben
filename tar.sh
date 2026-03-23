@@ -1,131 +1,99 @@
 #!/bin/bash
-
 set -e
 
 MODE="$1"        # pack / unpack / check
 TARGET="$2"      # 源目录 或 分片前缀
-OUT="$3"         # 输出名（pack用）
-PASSWORD="$4"    # 密码
-SPLIT_SIZE="${5:-100M}"
+OUT_PATH="$3"    # 输出路径（仅 pack 使用）
+SPLIT_SIZE="${4:-100M}" # 分片大小移到了第四个参数
 
 usage() {
-echo "用法："
-echo "  压缩: $0 pack <源文件/目录> <输出名> <密码> [分片大小]"
-echo "  解压: $0 unpack <分片前缀> <密码>"
-echo "  校验: $0 check <分片前缀> <密码>"
-exit 1
+    echo "用法："
+    echo "  压缩: $0 pack <源文件/目录> <输出路径前缀> [分片大小]"
+    echo "  解压: $0 unpack <分片路径前缀>"
+    echo "  校验: $0 check <分片路径前缀>"
+    echo "示例: $0 pack ./data ./backup/mydata 50M"
+    exit 1
 }
 
-if [ -z "$MODE" ]; then
-usage
-fi
+# 交互式密码获取函数
+get_password() {
+    local pass1 pass2
+    if [ "$MODE" = "pack" ]; then
+        # 压缩时要求输入两次以防手抖输错
+        while true; do
+            read -rsp "请输入加密密码: " pass1
+            echo
+            read -rsp "请再次输入以确认: " pass2
+            echo
+            if [ "$pass1" == "$pass2" ]; then
+                PASSWORD="$pass1"
+                break
+            else
+                echo "❌ 两次密码不一致，请重试。"
+            fi
+        done
+    else
+        # 解压或校验只需输入一次
+        read -rsp "请输入解密密码: " PASSWORD
+        echo
+    fi
+}
+
+if [ -z "$MODE" ] || [ -z "$TARGET" ]; then usage; fi
 
 # =====================
-
-# 📦 压缩
-
+# 📦 压缩 (Pack)
 # =====================
-
 if [ "$MODE" = "pack" ]; then
-if [ -z "$TARGET" ] || [ -z "$OUT" ] || [ -z "$PASSWORD" ]; then
-usage
-fi
+    if [ -z "$OUT_PATH" ]; then usage; fi
+    
+    get_password
+    
+    OUT_DIR=$(dirname "$OUT_PATH")
+    mkdir -p "$OUT_DIR"
 
-echo "👉 开始压缩: $TARGET"
-echo "👉 输出: ${OUT}.partXX"
-echo "👉 分片大小: $SPLIT_SIZE"
+    echo "👉 开始压缩: $TARGET"
+    tar -czvf - "$TARGET" | \
+    openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | \
+    split -b "$SPLIT_SIZE" -d - "${OUT_PATH}.part"
 
-tar -czvf - "$TARGET" | 
-openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | 
-split -b "$SPLIT_SIZE" -d - "${OUT}.part"
-
-echo "✅ 完成"
-ls -lh ${OUT}.part*
-exit 0
+    echo "✅ 完成，分片已保存在: $OUT_DIR"
+    exit 0
 fi
 
 # =====================
-
-# 🔍 获取分片（自动排序）
-
+# 🔍 获取分片工具函数
 # =====================
-
 get_parts() {
-ls ${TARGET}* 2>/dev/null | sort -V
+    ls ${TARGET}.part* 2>/dev/null | sort -V
 }
 
 # =====================
-
-# 📂 解压
-
+# 📂 解压 (Unpack) & 校验 (Check)
 # =====================
+if [ "$MODE" = "unpack" ] || [ "$MODE" = "check" ]; then
+    PARTS=$(get_parts)
+    if [ -z "$PARTS" ]; then
+        echo "❌ 找不到分片文件: ${TARGET}.part*"
+        exit 1
+    fi
 
-if [ "$MODE" = "unpack" ]; then
-if [ -z "$TARGET" ] || [ -z "$OUT" ]; then
-# 这里 OUT 实际是 PASSWORD
-PASSWORD="$3"
+    get_password
+
+    if [ "$MODE" = "unpack" ]; then
+        echo "👉 正在解压..."
+        cat $PARTS | openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$PASSWORD" | tar -xzvf -
+        echo "✅ 解压完成"
+    else
+        echo "👉 正在校验完整性..."
+        if cat $PARTS | openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$PASSWORD" | gzip -t; then
+            echo "✅ 密码正确且数据完整"
+        else
+            echo "❌ 校验失败：密码错误或文件损坏"
+            exit 1
+        fi
+    fi
+    exit 0
 fi
-
-if [ -z "$TARGET" ] || [ -z "$PASSWORD" ]; then
-usage
-fi
-
-PARTS=$(get_parts)
-
-if [ -z "$PARTS" ]; then
-echo "❌ 找不到分片文件"
-exit 1
-fi
-
-echo "👉 分片列表："
-echo "$PARTS"
-
-echo "👉 开始解密并解压..."
-
-cat $PARTS | 
-openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$PASSWORD" | 
-tar -xzvf -
-
-echo "✅ 解压完成"
-exit 0
-fi
-
-# =====================
-
-# ✅ 校验完整性（强烈推荐）
-
-# =====================
-
-if [ "$MODE" = "check" ]; then
-if [ -z "$TARGET" ] || [ -z "$OUT" ]; then
-PASSWORD="$3"
-fi
-
-if [ -z "$TARGET" ] || [ -z "$PASSWORD" ]; then
-usage
-fi
-
-PARTS=$(get_parts)
-
-if [ -z "$PARTS" ]; then
-echo "❌ 找不到分片文件"
-exit 1
-fi
-
-echo "👉 校验中..."
-
-cat $PARTS | 
-openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$PASSWORD" | 
-gzip -t
-
-echo "✅ 文件完整，可以解压"
-exit 0
-fi
-
-# =====================
-
-# ❌ 未知模式
-
-# =====================
 
 usage
