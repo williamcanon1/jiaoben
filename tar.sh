@@ -35,7 +35,7 @@ echo "👉 开始压缩: $TARGET"
 echo "👉 输出: ${OUT}.partXX"
 echo "👉 分片大小: $SPLIT_SIZE"
 
-tar -czf - "$TARGET" | 
+tar -czvf - "$TARGET" | 
 openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASSWORD" | 
 split -b "$SPLIT_SIZE" -d - "${OUT}.part"
 
